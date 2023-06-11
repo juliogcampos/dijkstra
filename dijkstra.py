@@ -1,10 +1,9 @@
 '''
+    Autor: Júlio Campos
+    Data: 22/05/19
+
     Algoritmo de Dijkstra
-
-        Encontra o caminho mais curto (menor distância) entre dois nós em um grafo ponderado
-
-        Autor: Júlio Campos
-        Data: 22/05/19
+    Encontra o caminho mais curto (menor distância) entre dois nós em um grafo ponderado
 '''
 
 # grafo representado em dicionário (tabela hash)
@@ -17,13 +16,17 @@ graph = {
     't': {'c': 3, 'd': 5}
 }
 
-# definir nó inicial e final no grafo
-keys = list(graph.keys())
-start = keys[0] # primeiro nó do grafo
-end = keys[len(keys)-1] # último nó do grafo
+# obter lista de nós do grafo
+nodes = list(graph.keys())
+
+# primeiro nó do grafo
+start = nodes[0]
+
+# último nó do grafo
+end = nodes[len(nodes)-1]
 
 
-def dijkstra(graph, start, end):
+def dijkstra(graph: dict, start: str, end: str):
 
     # dicionário que armazena todos os nós visitados com suas distâncias
     visited = {}
@@ -59,13 +62,11 @@ def dijkstra(graph, start, end):
                 # relaxamento: calcular a nova distância até o nó vizinho
                 new_distance = unvisited[min_node] + graph[min_node][neighbour]
 
-                '''
                 # impressões
-                print('\nnó', min_node)
+                print('\n- nó', min_node)
                 print('     vizinho:', neighbour)
                 print('     nova distância:', new_distance)
-                print('     distância mínima:', weight)             
-                '''
+                print('     distância mínima:', weight)
 
                 # se a distância até o vizinho for menor que a atual, atualiza os valores
                 if new_distance < unvisited[neighbour]:
@@ -110,14 +111,14 @@ def dijkstra(graph, start, end):
     list_visited = list(visited.values())
 
     # imprimir quantidade de nós visitados
-    print('\nNós visitados:', len(visited))
+    print(f'\nNós visitados: {len(visited)}')
 
     # imprimir a menor distância entre os nós inicial e final (último elemento da lista)
-    print('A menor distância entre', start, 'e', end,
-          'é :', list_visited[len(list_visited)-1])
+    print(f"A menor distância entre '{start}' e '{end}' é {list_visited[len(list_visited)-1]}")
 
     # imprimir caminho
-    print('O caminho mais curto é:', list(reversed(path)))
+    print(f'O caminho mais curto é: {list(reversed(path))}')
+
 
 # executar função passando como parâmetros o grafo, o nó inicial e o nó final
 dijkstra(graph, start, end)
